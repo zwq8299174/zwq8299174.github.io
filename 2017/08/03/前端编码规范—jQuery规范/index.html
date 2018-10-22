@@ -1,0 +1,1128 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <link href='http://static.niceweb.me/css/code.min.css' rel='stylesheet'>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=\5FAE\8F6F\96C5\9ED1:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="规范,jQuery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前端编码规范—jQuery规范                                                  前端编码规范—jQuery规范     前端编码规范—jQuery规范  使用单引号 缓存变量 缓存父元素 避免全局变量 使用驼峰式命名 使用单 var 模式 使用 on 来处理事件 精简 jquery 链式操作 维持代码的可读性 选择短路求值 避免通用选择">
+<meta name="keywords" content="规范,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端编码规范—jQuery规范">
+<meta property="og:url" content="http://blog.niceweb.me/2017/08/03/前端编码规范—jQuery规范/index.html">
+<meta property="og:site_name" content="前端观察">
+<meta property="og:description" content="前端编码规范—jQuery规范                                                  前端编码规范—jQuery规范     前端编码规范—jQuery规范  使用单引号 缓存变量 缓存父元素 避免全局变量 使用驼峰式命名 使用单 var 模式 使用 on 来处理事件 精简 jquery 链式操作 维持代码的可读性 选择短路求值 避免通用选择">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-07T06:39:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端编码规范—jQuery规范">
+<meta name="twitter:description" content="前端编码规范—jQuery规范                                                  前端编码规范—jQuery规范     前端编码规范—jQuery规范  使用单引号 缓存变量 缓存父元素 避免全局变量 使用驼峰式命名 使用单 var 模式 使用 on 来处理事件 精简 jquery 链式操作 维持代码的可读性 选择短路求值 避免通用选择">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '作者'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.niceweb.me/2017/08/03/前端编码规范—jQuery规范/"/>
+
+
+
+
+
+  <title> 前端编码规范—jQuery规范 | 前端观察 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">前端观察</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.niceweb.me/2017/08/03/前端编码规范—jQuery规范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="7*">
+      <meta itemprop="description" content="尘世中一枚迷途的小前端er">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/7498226?v=4&u=60bc9fd6e63144c1fd975814086a9fd328da90c6&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="前端观察">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端编码规范—jQuery规范
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T17:37:35+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/规范/" itemprop="url" rel="index">
+                    <span itemprop="name">规范</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/03/前端编码规范—jQuery规范/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/03/前端编码规范—jQuery规范/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+
+
+
+
+
+<!DOCTYPE html><html><head><title>前端编码规范—jQuery规范</title><meta charset="utf-8"></head><body><div id="preview-contents" class="note-content">
+                        <div id="wmd-preview" class="preview-content"></div>
+                    <div id="wmd-preview-section-263" class="wmd-preview-section preview-content">
+
+</div><div id="wmd-preview-section-264" class="wmd-preview-section preview-content">
+
+<h1 id="前端编码规范jquery规范"><center>前端编码规范—jQuery规范 </center></h1>
+
+<div><div class="toc"><div class="toc">
+<ul>
+<li><a href="#前端编码规范jquery规范">前端编码规范—jQuery规范 </a><ul>
+<li><a href="#使用单引号">使用单引号</a></li>
+<li><a href="#缓存变量">缓存变量</a></li>
+<li><a href="#缓存父元素">缓存父元素</a></li>
+<li><a href="#避免全局变量">避免全局变量</a></li>
+<li><a href="#使用驼峰式命名">使用驼峰式命名</a></li>
+<li><a href="#使用单-var-模式">使用单 var 模式</a></li>
+<li><a href="#使用-on-来处理事件">使用 on 来处理事件</a></li>
+<li><a href="#精简-jquery">精简 jquery</a></li>
+<li><a href="#链式操作">链式操作</a></li>
+<li><a href="#维持代码的可读性">维持代码的可读性</a></li>
+<li><a href="#选择短路求值">选择短路求值</a></li>
+<li><a href="#避免通用选择符">避免通用选择符</a></li>
+<li><a href="#避免隐式通用选择符">避免隐式通用选择符</a></li>
+<li><a href="#优化选择符">优化选择符</a></li>
+<li><a href="#避免多个-id-选择符">避免多个 id 选择符</a></li>
+<li><a href="#熟记技巧">熟记技巧</a></li>
+<li><a href="#坚持最新版本">坚持最新版本</a></li>
+<li><a href="#摒弃弃用方法">摒弃弃用方法</a></li>
+<li><a href="#利用-cdn">利用 CDN</a></li>
+<li><a href="#必要时组合-jquery-和-javascript-原生代码">必要时组合 jquery 和 javascript 原生代码</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div><div id="wmd-preview-section-265" class="wmd-preview-section preview-content">
+
+<h2 id="使用单引号">使用单引号</h2>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-266" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs elixir"><span class="hljs-variable">$(</span><span class="hljs-string">"div"</span>).html(<span class="hljs-string">"&lt;img src='1.jpg'/&gt;"</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-267" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs elixir"><span class="hljs-variable">$(</span><span class="hljs-string">'div'</span>).html(<span class="hljs-string">'&lt;img src="1.jpg"/&gt;'</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-268" class="wmd-preview-section preview-content">
+
+<h2 id="缓存变量">缓存变量</h2>
+
+<p>DOM 遍历是昂贵的，所以尽量将会重用的元素缓存。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-269" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> h = $(<span class="hljs-string">'#element'</span>).height();<br>$(<span class="hljs-string">'#element'</span>).css(<span class="hljs-string">'height'</span>, h - <span class="hljs-number">20</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-270" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> $element = $(<span class="hljs-string">'#element'</span>),<br>    h = $element.height();<br>$element.css(<span class="hljs-string">'height'</span>, h - <span class="hljs-number">20</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-271" class="wmd-preview-section preview-content">
+
+<h2 id="缓存父元素">缓存父元素</h2>
+
+<p>正如前面所提到的，DOM 遍历是一项昂贵的操作。典型做法是缓存父元素并在选择子元素时重用这些缓存元素。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-272" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> $container = $(<span class="hljs-string">'#container'</span>),<br>    $containerLi = $(<span class="hljs-string">'#container li'</span>),<br>    $containerLiSpan = $(<span class="hljs-string">'#container li span'</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-273" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> $container = $(<span class="hljs-string">'#container '</span>),<br>    $containerLi = $container.find(<span class="hljs-string">'li'</span>),<br>    $containerLiSpan= $containerLi.find(<span class="hljs-string">'span'</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-274" class="wmd-preview-section preview-content">
+
+<h2 id="避免全局变量">避免全局变量</h2>
+
+<p>jquery 与 javascript 一样，一般来说，最好确保你的变量在函数作用域内。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-275" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery"><span class="hljs-variable">$element</span> = $(<span class="hljs-string">'#element'</span>);<br>h = <span class="hljs-variable">$element</span>.height();<br><span class="hljs-variable">$element</span>.css(<span class="hljs-string">'height'</span>,h - <span class="hljs-number">20</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-276" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> $element = $(<span class="hljs-string">'#element'</span>),<br>    h = $element.height();<br>$element.css(<span class="hljs-string">'height'</span>,h - <span class="hljs-number">20</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-277" class="wmd-preview-section preview-content">
+
+<h2 id="使用驼峰式命名">使用驼峰式命名</h2>
+
+<p>使用驼峰式命名，在前面添加 $ 作为前缀，以便于标示为 jquery 对象。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-278" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> first = $(<span class="hljs-string">'#first'</span>),<br>    second = $(<span class="hljs-string">'#second'</span>),<br>    value = $first.val();<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-279" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-keyword">var</span> $first = $(<span class="hljs-string">'#first'</span>),<br>    $second = $(<span class="hljs-string">'#second'</span>),<br>    value = $first.val();<br></code></pre>
+
+</div><div id="wmd-preview-section-280" class="wmd-preview-section preview-content">
+
+<h2 id="使用单-var-模式">使用单 var 模式</h2>
+
+<p>将多条 var 语句合并为一条语句，建议将未赋值的变量放到后面。</p>
+
+</div><div id="wmd-preview-section-281" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs xquery">var <span class="hljs-variable">$first</span> = $(<span class="hljs-string">'#first'</span>),<br>    <span class="hljs-variable">$second</span> = $(<span class="hljs-string">'#second'</span>),<br>    <span class="hljs-keyword">value</span> = <span class="hljs-variable">$first</span>.val(),<br>    k = <span class="hljs-number">3</span>,<br>    cookiestring = <span class="hljs-string">'SOMECOOKIESPLEASE'</span>,<br>    i,<br>    j,<br>    myArray = {};<br></code></pre>
+
+</div><div id="wmd-preview-section-282" class="wmd-preview-section preview-content">
+
+<h2 id="使用-on-来处理事件">使用 on 来处理事件</h2>
+
+<p>在新版 jquery 中，更短的 on(‘click’) 用来取代类似 click() 这样的函数。在之前的版本中 on() 就是 bind()。自从 jquery 1.7 版本后，on() 是附加事件处理程序的首选方法。出于一致性考虑，你可以简单的全部使用 on() 方法。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-283" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$first.click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css(<span class="hljs-string">'border'</span>, <span class="hljs-string">'1px solid red'</span>);<br>    $first.css(<span class="hljs-string">'color'</span>, <span class="hljs-string">'blue'</span>);<br>});<br>$first.hover(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css(<span class="hljs-string">'border'</span>, <span class="hljs-string">'1px solid red'</span>);<br>});<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-284" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$first.on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css(<span class="hljs-string">'border'</span>, <span class="hljs-string">'1px solid red'</span>);<br>    $first.css(<span class="hljs-string">'color'</span>, <span class="hljs-string">'blue'</span>);<br>});<br>$first.on(<span class="hljs-string">'hover'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css(<span class="hljs-string">'border'</span>, <span class="hljs-string">'1px solid red'</span>);<br>});<br></code></pre>
+
+</div><div id="wmd-preview-section-285" class="wmd-preview-section preview-content">
+
+<h2 id="精简-jquery">精简 jquery</h2>
+
+<p>一般来说，最好尽可能合并属性。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-286" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$first.click(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css(<span class="hljs-string">'border'</span>, <span class="hljs-string">'1px solid red'</span>);<br>    $first.css(<span class="hljs-string">'color'</span>, <span class="hljs-string">'blue'</span>);<br>});<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-287" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$first.on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    $first.css({<br>        <span class="hljs-string">'border'</span>:<span class="hljs-string">'1px solid red'</span>,<br>        <span class="hljs-string">'color'</span>:<span class="hljs-string">'blue'</span><br>    });<br>});<br></code></pre>
+
+</div><div id="wmd-preview-section-288" class="wmd-preview-section preview-content">
+
+<h2 id="链式操作">链式操作</h2>
+
+<p>jquery 能够很轻易的实现链式操作。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-289" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$second.html(value);<br>$second.on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    alert(<span class="hljs-string">'hello everybody'</span>);<br>});<br>$second.fadeIn(<span class="hljs-string">'slow'</span>);<br>$second.animate({height: <span class="hljs-string">'120px'</span>}, <span class="hljs-number">500</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-290" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$second.html(value).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    alert(<span class="hljs-string">'hello everybody'</span>);<br>}).fadeIn(<span class="hljs-string">'slow'</span>).animate({height: <span class="hljs-string">'120px'</span>}, <span class="hljs-number">500</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-291" class="wmd-preview-section preview-content">
+
+<h2 id="维持代码的可读性">维持代码的可读性</h2>
+
+<p>伴随着精简代码和使用链式的同时，可能带来代码的难以阅读。添加缩进和换行能起到很好的效果。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-292" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$second.html(value).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<br>    alert(<span class="hljs-string">'hello everybody'</span>);<br>}).fadeIn(<span class="hljs-string">'slow'</span>).animate({height: <span class="hljs-string">'120px'</span>}, <span class="hljs-number">500</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-293" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$second.html(value)<br>    .on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>        alert(<span class="hljs-string">'hello everybody'</span>);<br>    })<br>    .fadeIn(<span class="hljs-string">'slow'</span>)<br>    .animate({<br>        height: <span class="hljs-string">'120px'</span><br>    }, <span class="hljs-number">500</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-294" class="wmd-preview-section preview-content">
+
+<h2 id="选择短路求值">选择短路求值</h2>
+
+<p>短路求值是一个从左到右求值的表达式，用 &amp;&amp; 或 || 操作符。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-295" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initVar</span>(<span class="hljs-params">$myVar</span>) </span>{<br>    <span class="hljs-keyword">if</span> (!$myVar) {<br>        $myVar = $(<span class="hljs-string">'#selector'</span>);<br>    }<br>}<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-296" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initVar</span>(<span class="hljs-params">$myVar</span>) </span>{<br>    $myVar = $myVar || $(<span class="hljs-string">'#selector'</span>);<br>}<br></code></pre>
+
+</div><div id="wmd-preview-section-297" class="wmd-preview-section preview-content">
+
+<h2 id="避免通用选择符">避免通用选择符</h2>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-298" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'.container &gt; *'</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-299" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs elixir"><span class="hljs-variable">$(</span><span class="hljs-string">'.container'</span>).children();<br></code></pre>
+
+</div><div id="wmd-preview-section-300" class="wmd-preview-section preview-content">
+
+<h2 id="避免隐式通用选择符">避免隐式通用选择符</h2>
+
+<p>通用选择符有时是隐式的，不容易发现。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-301" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs elixir"><span class="hljs-variable">$(</span><span class="hljs-string">':button'</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-302" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'input:button'</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-303" class="wmd-preview-section preview-content">
+
+<h2 id="优化选择符">优化选择符</h2>
+
+<p>例如，id 选择符应该是唯一的，所以没有必要添加额外的选择符。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-304" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'div#myid'</span>);<br>$(<span class="hljs-string">'div#footer a.myLink'</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-305" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#myid'</span>);<br>$(<span class="hljs-string">'#footer .myLink'</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-306" class="wmd-preview-section preview-content">
+
+<h2 id="避免多个-id-选择符">避免多个 id 选择符</h2>
+
+<p>在此强调，id 选择符应该是唯一的，不需要添加额外的选择符，更不需要多个后代 id 选择符。 <br>
+<strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-307" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#outer #inner'</span>);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-308" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#inner'</span>);<br></code></pre>
+
+</div><div id="wmd-preview-section-309" class="wmd-preview-section preview-content">
+
+<h2 id="熟记技巧">熟记技巧</h2>
+
+<p>你可能对使用 jquery 中的方法缺少经验，一定要多查看文档，可能会有一个更好或更快的方法来使用它。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-310" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#id'</span>).data(key, value);<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-311" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$.data(<span class="hljs-string">'#id'</span>, key, value);<br></code></pre>
+
+</div><div id="wmd-preview-section-312" class="wmd-preview-section preview-content">
+
+<h2 id="坚持最新版本">坚持最新版本</h2>
+
+<p>在条件允许的情况下，坚持使用最新版本。如果某些插件只支持特定的某一版本，可以在require中单独配置。新版本通常更好：更轻量级，更高效。当然你需要考虑你要支持的代码的兼容性。例如，2.0 版本不支持 ie 6/7/8。</p>
+
+</div><div id="wmd-preview-section-313" class="wmd-preview-section preview-content">
+
+<h2 id="摒弃弃用方法">摒弃弃用方法</h2>
+
+<p>关注每个新版本的废弃方法是非常重要的并尽量避免使用这些方法。</p>
+
+<p><strong>不推荐</strong></p>
+
+</div><div id="wmd-preview-section-314" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#stuff'</span>).live(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'hooray'</span>);<br>});<br></code></pre>
+
+<p><strong>推荐</strong></p>
+
+</div><div id="wmd-preview-section-315" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-javascript hljs">$(<span class="hljs-string">'#stuff'</span>).on(<span class="hljs-string">'click'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'hooray'</span>);<br>});<br></code></pre>
+
+</div><div id="wmd-preview-section-316" class="wmd-preview-section preview-content">
+
+<h2 id="利用-cdn">利用 CDN</h2>
+
+<p>CDN 能保证选择离用户最近的缓存并迅速响应。如果网站为国内网站，因为强大的长城防火墙，所以可以选择国内例如阿里、百度、360等大公司的CDN加速。如果是国外网站，则可以使用google、jquery官网等CDN加速服务。</p>
+
+</div><div id="wmd-preview-section-317" class="wmd-preview-section preview-content">
+
+<h2 id="必要时组合-jquery-和-javascript-原生代码">必要时组合 jquery 和 javascript 原生代码</h2>
+
+<p>如上所述，jquery 就是 javascript，这意味着用 jquery 能做的事情，同样可以用原生代码来做。原生代码的可读性和可维护性可能不如 jquery，而且代码更长。但也意味着更高效（通常更接近底层代码可读性越差，性能越高）。牢记没有任何框架能比原生代码更小，更轻，更高效。</p></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div></body></html>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      7*
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.niceweb.me/2017/08/03/前端编码规范—jQuery规范/" title="前端编码规范—jQuery规范">http://blog.niceweb.me/2017/08/03/前端编码规范—jQuery规范/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/规范/" rel="tag"># 规范</a>
+          
+            <a href="/tags/jQuery/" rel="tag"># jQuery</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/03/前端编码规范—JavaScript规范/" rel="next" title="前端编码规范—JavaScript规范">
+                <i class="fa fa-chevron-left"></i> 前端编码规范—JavaScript规范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/04/Angular一小时快速上手/" rel="prev" title="Angular一小时快速上手">
+                Angular一小时快速上手 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/7498226?v=4&u=60bc9fd6e63144c1fd975814086a9fd328da90c6&s=400"
+               alt="7*" />
+          <p class="site-author-name" itemprop="name">7*</p>
+           
+              <p class="site-description motion-element" itemprop="description">尘世中一枚迷途的小前端er</p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前端编码规范jquery规范"><span class="nav-number">1.</span> <span class="nav-text">前端编码规范—jQuery规范 </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用单引号"><span class="nav-number">1.1.</span> <span class="nav-text">使用单引号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存变量"><span class="nav-number">1.2.</span> <span class="nav-text">缓存变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存父元素"><span class="nav-number">1.3.</span> <span class="nav-text">缓存父元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免全局变量"><span class="nav-number">1.4.</span> <span class="nav-text">避免全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用驼峰式命名"><span class="nav-number">1.5.</span> <span class="nav-text">使用驼峰式命名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用单-var-模式"><span class="nav-number">1.6.</span> <span class="nav-text">使用单 var 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-on-来处理事件"><span class="nav-number">1.7.</span> <span class="nav-text">使用 on 来处理事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精简-jquery"><span class="nav-number">1.8.</span> <span class="nav-text">精简 jquery</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链式操作"><span class="nav-number">1.9.</span> <span class="nav-text">链式操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#维持代码的可读性"><span class="nav-number">1.10.</span> <span class="nav-text">维持代码的可读性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择短路求值"><span class="nav-number">1.11.</span> <span class="nav-text">选择短路求值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免通用选择符"><span class="nav-number">1.12.</span> <span class="nav-text">避免通用选择符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免隐式通用选择符"><span class="nav-number">1.13.</span> <span class="nav-text">避免隐式通用选择符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化选择符"><span class="nav-number">1.14.</span> <span class="nav-text">优化选择符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免多个-id-选择符"><span class="nav-number">1.15.</span> <span class="nav-text">避免多个 id 选择符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#熟记技巧"><span class="nav-number">1.16.</span> <span class="nav-text">熟记技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坚持最新版本"><span class="nav-number">1.17.</span> <span class="nav-text">坚持最新版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#摒弃弃用方法"><span class="nav-number">1.18.</span> <span class="nav-text">摒弃弃用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用-cdn"><span class="nav-number">1.19.</span> <span class="nav-text">利用 CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必要时组合-jquery-和-javascript-原生代码"><span class="nav-number">1.20.</span> <span class="nav-text">必要时组合 jquery 和 javascript 原生代码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">7*</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt9rGKH8';
+      var conf = '41c3e3f3b25a5ff73445fe3e4b1f42e9';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

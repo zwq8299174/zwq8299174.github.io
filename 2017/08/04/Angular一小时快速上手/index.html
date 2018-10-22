@@ -1,0 +1,976 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <link href='http://static.niceweb.me/css/code.min.css' rel='stylesheet'>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=\5FAE\8F6F\96C5\9ED1:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Angular2是google在2014年9月发布全新的MVVM框架，由于不是基于AngularJS1.X简单升级后得到的，很多核心思想都不同甚至被抛弃。例：$scope的概念被抛弃，controller被抛弃，ES6的支持，TypeScript作为官方开发语言等等，所以全新的angular在命名规则上也有了一些变化，即：Angular。官方的寓意是Angular不在是一个简单的前端JS框架，他">
+<meta name="keywords" content="Angular">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular一小时快速上手">
+<meta property="og:url" content="http://blog.niceweb.me/2017/08/04/Angular一小时快速上手/index.html">
+<meta property="og:site_name" content="前端观察">
+<meta property="og:description" content="Angular2是google在2014年9月发布全新的MVVM框架，由于不是基于AngularJS1.X简单升级后得到的，很多核心思想都不同甚至被抛弃。例：$scope的概念被抛弃，controller被抛弃，ES6的支持，TypeScript作为官方开发语言等等，所以全新的angular在命名规则上也有了一些变化，即：Angular。官方的寓意是Angular不在是一个简单的前端JS框架，他">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-07T07:10:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular一小时快速上手">
+<meta name="twitter:description" content="Angular2是google在2014年9月发布全新的MVVM框架，由于不是基于AngularJS1.X简单升级后得到的，很多核心思想都不同甚至被抛弃。例：$scope的概念被抛弃，controller被抛弃，ES6的支持，TypeScript作为官方开发语言等等，所以全新的angular在命名规则上也有了一些变化，即：Angular。官方的寓意是Angular不在是一个简单的前端JS框架，他">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '作者'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.niceweb.me/2017/08/04/Angular一小时快速上手/"/>
+
+
+
+
+
+  <title> Angular一小时快速上手 | 前端观察 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">前端观察</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://blog.niceweb.me/2017/08/04/Angular一小时快速上手/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="7*">
+      <meta itemprop="description" content="尘世中一枚迷途的小前端er">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/7498226?v=4&u=60bc9fd6e63144c1fd975814086a9fd328da90c6&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="前端观察">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular一小时快速上手
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T16:16:35+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Angular/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/04/Angular一小时快速上手/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/04/Angular一小时快速上手/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Angular2是google在2014年9月发布全新的MVVM框架，由于不是基于AngularJS1.X简单升级后得到的，很多核心思想都不同甚至被抛弃。例：$scope的概念被抛弃，controller被抛弃，ES6的支持，TypeScript作为官方开发语言等等，所以全新的angular在命名规则上也有了一些变化，即：Angular。官方的寓意是Angular不在是一个简单的前端JS框架，他可以运行在任何在平台上，所以本文全部以官方名字为准。</p>
+</blockquote>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>首先需要安装npm包管理工具，去官网下载对应自己系统的node和npm套件安装即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/angular/quickstart.git quickstart</div><div class="line"></div><div class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</div><div class="line"></div><div class="line"><span class="built_in">cd</span> quickstart</div><div class="line"></div><div class="line">cnpm install</div><div class="line"></div><div class="line">npm start</div></pre></td></tr></table></figure>
+<p>此时浏览器中如果出现了‘Hello Angular’的字样，说明你已经成功的启动了第一个Angular项目，Good Luck。<br>注：如果已经安装过cnpm的同学可跳过第二步。</p>
+<h2 id="目录结构说明"><a href="#目录结构说明" class="headerlink" title="目录结构说明"></a>目录结构说明</h2><blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">文件</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">e2e</td>
+<td style="text-align:left">端到端测试文件夹(可以忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">src</td>
+<td style="text-align:left">项目主要资源文件夹</td>
+</tr>
+<tr>
+<td style="text-align:left">–/app/</td>
+<td style="text-align:left">app资源文件夹</td>
+</tr>
+<tr>
+<td style="text-align:left">–/app/app.component.ts</td>
+<td style="text-align:left">app根组件逻辑文件(.js文件是编译后自己生成的，可忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">–/app/app.module.ts</td>
+<td style="text-align:left">app根模块</td>
+</tr>
+<tr>
+<td style="text-align:left">–/index.html</td>
+<td style="text-align:left">app入口文件</td>
+</tr>
+<tr>
+<td style="text-align:left">–/main.ts</td>
+<td style="text-align:left">app启动文件</td>
+</tr>
+<tr>
+<td style="text-align:left">–/styles.css</td>
+<td style="text-align:left">app主要样式文件</td>
+</tr>
+<tr>
+<td style="text-align:left">–/tsconfig.json</td>
+<td style="text-align:left">typescript编译配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">–/systemjs.config.js</td>
+<td style="text-align:left">systemjs模块加载配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">bs-config.e2e.json</td>
+<td style="text-align:left">端到端测试基础配置文件(可以忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">bs-config.json</td>
+<td style="text-align:left">基础配置文件(可以忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">karma.conf.js</td>
+<td style="text-align:left">单元测试配置文件(可以忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">karma-test-shim.js</td>
+<td style="text-align:left">单元测试配置文件(可以忽略)</td>
+</tr>
+<tr>
+<td style="text-align:left">package.json</td>
+<td style="text-align:left">npm配置文件</td>
+</tr>
+<tr>
+<td style="text-align:left">protractor.config.js</td>
+<td style="text-align:left">protractor 端对端 (e2e) 测试器运行器的配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">tslint.json</td>
+<td style="text-align:left">该文件定义了 Angular 风格指南与本文档站作者喜爱的语法检查规则。</td>
+</tr>
+</tbody>
+</table>
+<p>更多文件说明请查看：<a href="https://www.angular.cn/docs/ts/latest/guide/setup-systemjs-anatomy.html" target="_blank" rel="external">https://www.angular.cn/docs/ts/latest/guide/setup-systemjs-anatomy.html</a></p>
+</blockquote>
+<h2 id="IDE的选择"><a href="#IDE的选择" class="headerlink" title="IDE的选择"></a>IDE的选择</h2><p>&#160; &#160; &#160; &#160;因为TypeScript是官方推荐的Angular开发语言，而TypeScript又是Microsoft在2013年6月发布的一种开元的编程语言。TypeScript和ES6一样是JavaScript的超集，不同的是TypeScript同时还是ES6的超集。因为是C#之父主导开发的TypeScript，所以可想而知TypeScript相对JavaScript更像是一门面向对象的编程语言，同时支持静态类型、类的继承、多态、接口、命名空间、装饰器等特性。</p>
+<p>&#160; &#160; &#160; &#160;由于TypeScript面世时间不长，所以对应的IDE选择不是很多。首先推荐微软官方的<span class="red"><strong><code>VS code</code></strong></span>完全免费，且轻量级，对自家TypeScript最好的支持及语法提示，还有可视化的调试方案，丰富的插件可以安装，内部集成了命令行，可以快速的定位项目的文件夹，很方便。</p>
+<p>&#160; &#160; &#160; &#160;github官方出品的<strong><code>Atom</code></strong> 也是现在前端非常火的开发工具，丰富的插件可供安装，官方提供TypeScript语法提示插件。自己还可以安装汉化插件，主题视觉插件，其他的语法提示插件，类似less、sass、ES6、css、HTML等等。功能相对没有VS code强大但是相对比较轻量级，尤其是mac系统的同学如果已经有了主力开发工具，可以考虑用Atom作为辅助的开发工具。</p>
+<p>&#160; &#160; &#160; &#160;<strong><code>WebStorm</code></strong> 是老牌IDE厂商jetbrains公司旗下一款JavaScript 开发工具。在开发JavaScript代码项目的时候就体现出了强大的功能，开发TypeScript的项目一样需要安装插件来实现对TypeScript的语法提示及项目的构建。相对比较重量一些，因为内置了web服务器，不知道是否可以配置内部的服务器直接浏览TypeScript项目，如果可以的话应该非常方便，因为其他的IDE都需要使用node来起开发服务器，然后在浏览器中才可以看到构建好的项目。</p>
+<p>&#160; &#160; &#160; &#160;<strong><code>Sublime Text</code></strong> 这个应该很多人在用了，和Atom差不多，比较轻量级，没有内置服务器，可以安装插件。主题插件、提示插件等等，建议作为辅助开发工具或者文档查看工具。</p>
+<p>&#160; &#160; &#160; &#160;最后推荐一个<strong><code>APICloud Studio 2</code></strong> ，这个是中国的公司开发的一款IDE。它基于刚才提到的Atom，在功能及界面上做了符合中国人的改进。界面全部原生汉语，不需要汉化，对于英文不好的同学可以考虑一手。另外开发中一些常用的功能，如代码的版本管理，它集成了SVN和GIT两种代码管理的方式。还有一些其他的非常好的功能，有兴趣的同学可以下去自己了解。</p>
+<blockquote>
+<p>下载地址：<br><strong><code>Atom</code></strong>: <a href="https://atom.io/" target="_blank" rel="external">https://atom.io/</a><br><strong><code>VS code</code></strong>:<a href="https://code.visualstudio.com/" target="_blank" rel="external">https://code.visualstudio.com/</a><br><strong><code>WebStorm</code></strong>:<a href="http://www.jetbrains.com/webstorm/" target="_blank" rel="external">http://www.jetbrains.com/webstorm/</a><br><strong><code>ASublime Text</code></strong>: <a href="https://www.sublimetext.com/3" target="_blank" rel="external">https://www.sublimetext.com/3</a><br><strong><code>APICloud Studio 2</code></strong>: <a href="http://www.apicloud.com/devtools" target="_blank" rel="external">http://www.apicloud.com/devtools</a></p>
+</blockquote>
+<h2 id="了解代码"><a href="#了解代码" class="headerlink" title="了解代码"></a>了解代码</h2><p>使用刚才下载的IDE打开<code>./src/index.html</code>，代码如下。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Angular QuickStart<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">base</span> <span class="attr">href</span>=<span class="string">"/"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"styles.css"</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Polyfill(s) for older browsers --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/core-js/client/shim.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/zone.js/dist/zone.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/systemjs/dist/system.src.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"systemjs.config.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="undefined">      System.import('main.js').catch(function(err)&#123; console.error(err); &#125;);</span></div><div class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">my-app</span>&gt;</span>Loading AppComponent content here ...<span class="tag">&lt;/<span class="name">my-app</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>代码说明：头部链接的js主要看system和system.config这两个js，其作用和requirejs和require.config.js基本一样。下面的<code>&lt;my-app&gt;&lt;/my-app&gt;</code>是app根组件的所在，也是整个app内容的入口。</p>
+<p>接着打开<code>./src/main.ts</code>文件，代码如下。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; platformBrowserDynamic &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser-dynamic'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; AppModule &#125; <span class="keyword">from</span> <span class="string">'./app/app.module'</span>;</div><div class="line"></div><div class="line">platformBrowserDynamic().bootstrapModule(AppModule);</div></pre></td></tr></table></figure></p>
+<p>代码说明：这个文件是app的引导文件，导入动态引导模块儿，然后启动app的跟模块AppModule即可。有静态引导和动态引导两种方式，区别在于浏览器编译和非浏览器编译，一般开发都使用动态引导即可，想了解的更深入的同学可以去查阅相关资料。</p>
+<p>打开<code>./src/app/app.module.ts</code>文件，代码如下。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  <span class="keyword">from</span> <span class="string">'./app.component'</span>;</div><div class="line"></div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports:      [ BrowserModule ],</div><div class="line">  declarations: [ AppComponent ],</div><div class="line">  bootstrap:    [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure></p>
+<p>代码说明：<code>import</code>、<code>export</code>和<code>@NgModule</code>都是TypeScript的语法，import是载入一个文件，后面中括号中是载入文件后，对应文件输出的变量、方法、类等等。项目中需要的组件、模块、自定义的服务、第三方插件等等都需要用这种办法载入。以@开头的叫做装饰器，你可以理解为是一个组件或者模块的配置选项，里面是一些依赖、模板、样式等等。export字面理解就是输出、导出的意思，不管是模块、服务还是组件，想要让其他的文件访问到你本身的逻辑，一定要有导出，具体导出什么，怎么导出，根据业务需要可以不同，一般整个class导出即可。</p>
+<p>打开<code>./src/app/app.component.ts</code>，你会看到以下的代码。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'my-app'</span>,</div><div class="line">  template: <span class="string">`&lt;h1&gt;Hello &#123;&#123;name&#125;&#125;&lt;/h1&gt;`</span>,</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent  &#123; name = <span class="string">'Angular'</span>; &#125;</div></pre></td></tr></table></figure></p>
+<p>代码说明：<br>&#160; &#160; &#160; &#160;如果是一个组件，必须在上面从angular核心模块儿中导入Component这个类，然后在装饰器@Component中配置你的组件。<br>&#160; &#160; &#160; &#160;<code>selector</code>的意思是你组件的表现方式或者说是自定义标签是什么，这里要注意的地方是和AngularJS1.X版本的指令不太一样的地方是标签如果是’-‘连接的，组件中不需要使用驼峰命名法。<br>&#160; &#160; &#160; &#160;<code>template</code>的意思是组件的HTML部分，可以是用多行引号，这是ES6的新特性，可以加载多行文本内容。<code>templateUrl</code>是加载外部模板的配置项，<code>template</code>和<code>templateUrl</code>不可以同时存在，否则会报错。<br>&#160; &#160; &#160; &#160;<code>styles</code>是模板的内联样式，可以是css、less、sass。<code>stylesUrl</code>为模板指定外联样式文件，这里需要注意的是<code>styles</code>和<code>stylesUrl</code>可以同时存在。如果同时存在的话，<code>styles</code>会被先解析，然后是<code>stylesUrl</code>换句话说<code>styles</code>会被<code>stylesUrl</code>的样式覆盖。细心的同学可能注意到了<code>stylesUrl</code>是复数，所以<code>stylesUrl</code>的值可以是一个数组，类似<code>[&#39;a.css&#39;,&#39;b.css&#39;]</code>。<br>&#160; &#160; &#160; &#160;<code>export class AppComponent</code>这段是实现这个组件逻辑的主要区域，字面理解是一个类，熟悉java的同学应该不陌生。类的封装、继承及多态，它也一样都有。在类的主体中，定义了一个变量<code>name</code>，且它的值是<code>Angular</code>。此时我们再回头看<code>template</code>中的内容<code>&lt;h1&gt;Hello &lt;/h1&gt;</code>,其中<code></code>是插值表达式，用过js模板引擎、AngularJS1.X版本或者是vue的同学应该都不陌生。和AngularJS1.X不同的是在逻辑层我们不需要再把对应的变量或者方法绑定到某个angular暴露出来的变量或者方法上(类似AngularJS1.X的<code>$scope</code>和<code>$rootScope</code>)。我们要做的就是名字对应上即可，剩下的交给Angular即可，框架会自动寻找组件对应的类进行匹配。</p>
+<h2 id="继续深入"><a href="#继续深入" class="headerlink" title="继续深入"></a>继续深入</h2><h3 id="官方示例扩展"><a href="#官方示例扩展" class="headerlink" title="官方示例扩展"></a>官方示例扩展</h3><p>继续刚才打开的<code>./src/app/app.component.ts</code>，我们先声明一个Hero的类，然后在<code>AppComponent</code>这个类中做一些改造，代码如下。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> Hero &#123;</div><div class="line">  id: <span class="built_in">number</span>;</div><div class="line">  name: <span class="built_in">string</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent  &#123;</div><div class="line">  hero: Hero = &#123;</div><div class="line">	  id: <span class="number">2</span>,</div><div class="line">	  name: <span class="string">'Windstorm'</span></div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接着需要修改下<code>template</code>的内容。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;hero.id&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;hero.name&#125;&#125; details!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>浏览器会自动刷新，切换过去可以看下效果。</p>
+<p>现在来点稍微复杂的功能，继续改造<code>template</code>这个类。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;hero.name&#125;&#125; details!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span>id: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;hero.id&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span>name: <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"hero.name"</span> <span class="attr">placeholder</span>=<span class="string">"name"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>可以看到有输入框了，我们希望在<code>input</code>中输入内容，对应绑定的内容也变化，即双向绑定。双向绑定的写法是<code>[(ngModel)]</code>后面的值是要接收内容的变量名，下面我们来实现这个功能。</p>
+<p>打开<code>./src/app/app.module.ts</code>，修改成如下的样子。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; NgModule &#125;      <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</div><div class="line"><span class="keyword">import</span> &#123; FormsModule &#125;   <span class="keyword">from</span> <span class="string">'@angular/forms'</span>; <span class="comment">// &lt;-- NgModel lives here</span></div><div class="line"><span class="keyword">import</span> &#123; AppComponent &#125;  <span class="keyword">from</span> <span class="string">'./app.component'</span>;</div><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports: [</div><div class="line">    BrowserModule,</div><div class="line">    FormsModule <span class="comment">// &lt;-- import the FormsModule before binding with [(ngModel)]</span></div><div class="line">  ],</div><div class="line">  declarations: [</div><div class="line">    AppComponent</div><div class="line">  ],</div><div class="line">  bootstrap: [ AppComponent ]</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123; &#125;</div></pre></td></tr></table></figure></p>
+<p>可以看到相比修改之前，我们载入了<code>FormsModule</code>这个模块，然后在跟模块装饰器的<code>imports</code>配置项中加入了我们所依赖的<code>FormsModule</code>，这样就可以在整个app中使用<code>FormsModule</code>这个模块的所有功能了。这里可以理解为在项目启动时候，需要告诉Angular你需要用到哪些模块儿及组件。这时切换到浏览器，然后在输入框中随意输入，我们看到双向绑定的功能已经实现。</p>
+<h3 id="列表循环"><a href="#列表循环" class="headerlink" title="列表循环"></a>列表循环</h3><p>在<code>./src/app/app.component.ts</code>尾部添加如下代码。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> HEROES: Hero[] = [</div><div class="line">  &#123; id: <span class="number">11</span>, name: <span class="string">'Mr. Nice'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">12</span>, name: <span class="string">'Narco'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">13</span>, name: <span class="string">'Bombasto'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">14</span>, name: <span class="string">'Celeritas'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">15</span>, name: <span class="string">'Magneta'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">16</span>, name: <span class="string">'RubberMan'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">17</span>, name: <span class="string">'Dynama'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">18</span>, name: <span class="string">'Dr IQ'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">19</span>, name: <span class="string">'Magma'</span> &#125;,</div><div class="line">  &#123; id: <span class="number">20</span>, name: <span class="string">'Tornado'</span> &#125;</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>接着在<code>AppComponent</code>的类中添加<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">heroes = HEROES;</div></pre></td></tr></table></figure></p>
+<p>然后修改我们模板下面加上列表的html代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>My Heroes<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"heroes"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"badge"</span>&gt;</span>&#123;&#123;hero.id&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span> &#123;&#123;hero.name&#125;&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>给列表加上样式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">styles: [`</div><div class="line">  <span class="selector-class">.selected</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#CFD8DC</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> &#123;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">2em</span> <span class="number">0</span>;</div><div class="line">    <span class="attribute">list-style-type</span>: none;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">15em</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> <span class="selector-tag">li</span> &#123;</div><div class="line">    <span class="attribute">cursor</span>: pointer;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#EEE</span>;</div><div class="line">    <span class="attribute">margin</span>: .<span class="number">5em</span>;</div><div class="line">    <span class="attribute">padding</span>: .<span class="number">3em</span> <span class="number">0</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">1.6em</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-class">.selected</span><span class="selector-pseudo">:hover</span> &#123;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#BBD8DC</span> <span class="meta">!important</span>;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> <span class="selector-tag">li</span><span class="selector-pseudo">:hover</span> &#123;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#607D8B</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#DDD</span>;</div><div class="line">    <span class="attribute">left</span>: .<span class="number">1em</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> <span class="selector-class">.text</span> &#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">top</span>: -<span class="number">3px</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.heroes</span> <span class="selector-class">.badge</span> &#123;</div><div class="line">    <span class="attribute">display</span>: inline-block;</div><div class="line">    <span class="attribute">font-size</span>: small;</div><div class="line">    <span class="attribute">color</span>: white;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">0.8em</span> <span class="number">0.7em</span> <span class="number">0</span> <span class="number">0.7em</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#607D8B</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">1em</span>;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">left</span>: -<span class="number">1px</span>;</div><div class="line">    <span class="attribute">top</span>: -<span class="number">4px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">1.8em</span>;</div><div class="line">    <span class="attribute">margin-right</span>: .<span class="number">8em</span>;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4px</span>;</div><div class="line">  &#125;`]</div></pre></td></tr></table></figure></p>
+<p>这时候切换到浏览器，已经可以看到一个带有样式的列表已经渲染好，为了保证我们的组件逻辑文件简介，我们把组件的样式单独拿出来形成单独的css文件，然后用外联的方式引入它。首先新建<code>./app/app.css</code>，然后修改<code>AppComponent</code>，删除原来的<code>styles</code>,添加新的属性，如下<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">styleUrls:[<span class="string">'./app.css'</span>],</div></pre></td></tr></table></figure></p>
+<h3 id="处理事件"><a href="#处理事件" class="headerlink" title="处理事件"></a>处理事件</h3><p>接着刚才列表循环的例子来做修改，在<code>&lt;li&gt;</code>标签上加上一下代码<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(click)=<span class="string">"onSelect(hero)"</span></div></pre></td></tr></table></figure></p>
+<p>写法类似AngularJS的事件绑定，但是不一样的是前面少了<code>ng-</code>，但是多了中括号的包裹。Angular中<code>[]</code>是属性绑定的写法，例<code>[disabled]=&quot;choose&quot;</code>。<code>()</code>是我们刚用到的事件绑定写法，还有之前用到的<code>[(ngModel)]</code>是双向绑定的写法。</p>
+<p>在<code>AppComponent</code>的类中添加<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">selectedHero: Hero;</div><div class="line">onSelect(hero: Hero): <span class="built_in">void</span> &#123;</div><div class="line">  <span class="keyword">this</span>.selectedHero = hero;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>现在已经绑了<code>&lt;li&gt;</code>的<code>click</code>事件，点击的逻辑可以在<code>onSelect</code>方法中饭实现。一般我们绑定事件以后可能会需要基于触发事件的详细信息来做一些逻辑，Angular提供了这样的方法，只需要在绑定事件后运行的方法中加入<code>$event</code>这个参数即可，代码如下。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(click)=<span class="string">"onSelect(hero,$event)"</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">selectedHero: Hero;</div><div class="line">onSelect(hero: Hero,e:<span class="built_in">any</span>): <span class="built_in">void</span> &#123;</div><div class="line"><span class="built_in">console</span>.log(e);</div><div class="line">  <span class="keyword">this</span>.selectedHero = hero;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>修改后再次点击<code>&lt;li&gt;</code>我们会看到控制台中输出了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MouseEvent &#123;<span class="attr">isTrusted</span>: <span class="literal">true</span>, <span class="attr">screenX</span>: <span class="number">184</span>, <span class="attr">screenY</span>: <span class="number">381</span>, <span class="attr">clientX</span>: <span class="number">184</span>, <span class="attr">clientY</span>: <span class="number">291</span>…&#125;</div></pre></td></tr></table></figure></p>
+<p>这就是刚才点击事件的详细信息，想看全部内容的同学可以点开这个对象。</p>
+<h3 id="常用内置指令"><a href="#常用内置指令" class="headerlink" title="常用内置指令"></a>常用内置指令</h3><h4 id="ngIf"><a href="#ngIf" class="headerlink" title="ngIf"></a>ngIf</h4><p>基于我们上一步的代码再做如下的修改<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;selectedHero.name&#125;&#125; details!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span>id: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;selectedHero.id&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>name: <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"selectedHero.name"</span> <span class="attr">placeholder</span>=<span class="string">"name"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这时我们切换到浏览器中，会发下如下的错误信息<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXCEPTION: <span class="built_in">TypeError</span>: Cannot read property <span class="string">'name'</span> <span class="keyword">of</span> <span class="literal">undefined</span> <span class="keyword">in</span> [<span class="literal">null</span>]</div></pre></td></tr></table></figure></p>
+<p>原因是我们在<code>AppComponent</code>的类中只给selectedHero制定了类型而没有给它复制，然后在<code>[(ngModel)]=&quot;selectedHero.name&quot;</code>这段代码中需要访问<code>selectedHero</code>中不存在的<code>name</code>属性，所以会报错，我们修改代码让程序运行起来。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngIf</span>=<span class="string">"selectedHero"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;selectedHero.name&#125;&#125; details!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span>id: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;selectedHero.id&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">label</span>&gt;</span>name: <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"selectedHero.name"</span> <span class="attr">placeholder</span>=<span class="string">"name"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;大家可以看到我们在刚才最初添加的代码外层又包了一个<code>&lt;div&gt;</code>，而且它的上面有一条指令<code>*ngIf=&quot;selectedHero&quot;</code>，表示如果<code>selectedHero</code>有值，才会显示<code>&lt;div&gt;</code>标签所包含的这段代码。这里注意下是有值，逻辑类似你在JavaScript中使用<code>if(test)</code>一个道理，如果<code>test</code>是<code>0</code>、<code>null</code>、<code>undefined</code>这类型的值，在<code>if</code>判断中<code>test</code>会被认为是<code>false</code>，所以需要注意下。<br>&#160; &#160; &#160; &#160;这时切换到浏览器查看效果，发现报错没有了，而且只有当你点击了某个<code>&lt;li&gt;</code>后，上面有<code>&lt;input&gt;</code>标签的区域才会显示出来，这个就是<code>ngIf</code>指令的一般用法，注意别忘记前面的<code>*</code>。</p>
+<h4 id="ngClass"><a href="#ngClass" class="headerlink" title="ngClass"></a>ngClass</h4><p>&#160; &#160; &#160; &#160;通常我们需要通过某个事件或者方法，改变视图层某个DOM的样式，最常用的方法就是给这个元素添加<code>class</code>。Angular提供这样的内置指令来帮助我们实现这样的功能，下面来继续改造我们的代码。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes"</span></span></div><div class="line"><span class="tag">  [<span class="attr">class.selected</span>]=<span class="string">"hero === selectedHero"</span></span></div><div class="line"><span class="tag">  (<span class="attr">click</span>)=<span class="string">"onSelect(hero)"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"badge"</span>&gt;</span>&#123;&#123;hero.id&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span> &#123;&#123;hero.name&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160; &#160;在<code>&lt;li&gt;</code>标签上添加<code>[class.selected]=&quot;hero === selectedHero&quot;</code>这一条指令，意思是当<code>selectedHero</code>和当前<code>&lt;li&gt;</code>循环的<code>hero</code>相等时，添加<code>class</code>：<code>selected</code>，切换到浏览器，点击某个<code>&lt;li&gt;</code>你已经可以看到效果。<br>&#160; &#160; &#160; &#160;但是有时候，我们需要不同的事件或方法作用在同一个DOM上让它在不同状态的表现形式也不一样，这就需要添加多个<code>class</code>,当然你可以依照上面的思路添加多个<code>[class.selected]</code>指令也是可以的。但是Angular已经考虑到有这样的情况发生，为我们提供了更优美的解决方案。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ngClass]=<span class="string">"&#123;'selected':hero === selectedHero,'normal':hero!=selectedHero&#125;"</span></div></pre></td></tr></table></figure></p>
+<p>其中<code>[ngClass]</code> 表示一个 <code>class</code> 的对象集合，对象的 <code>key</code> 是我们需要操作的 <code>class</code> ， <code>value</code> 是这个 <code>class</code> 对应的表达式。</p>
+<h4 id="管道操作符"><a href="#管道操作符" class="headerlink" title="管道操作符 ( | )"></a>管道操作符 ( | )</h4><p>在模板插值的时候我们最常用的应该就是管道操作符 ( | )这个了，Angular一样提供了一些内置的过滤器，常见的大小写、日期、货币、数字、百分比等等，当然也可以自定义过滤器。多个过滤器可以链式操作，管道的参数可以跟在这个管道的后面。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&#123; birthday | date:<span class="string">'fullDate'</span> | uppercase&#125;&#125;</div></pre></td></tr></table></figure>
+<p>这里再说一个比较常用的管道，在AngularJS1中官方内置了<code>LimitTo</code>的过滤器，但是Angular中并没有类似的过滤器，但是有一个<code>slice</code>的过滤器，使得我们操作数据更加灵活，用法和JavaScript原生的<code>Array.slice</code>一样。官方同样没有提供<code>OrderByPipe</code>这样的管道，需要的话都是需要自己写的。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let hero of heroes | slice:0:5"</span></span></div><div class="line"><span class="tag">	[<span class="attr">ngClass</span>]=<span class="string">"&#123;'selected':hero === selectedHero,'normal':hero!=selectedHero&#125;"</span></span></div><div class="line"><span class="tag">	(<span class="attr">click</span>)=<span class="string">"onSelect(hero,$event)"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"badge"</span>&gt;</span>&#123;&#123;hero.id&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span> &#123;&#123;hero.name&#125;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="组件的嵌套"><a href="#组件的嵌套" class="headerlink" title="组件的嵌套"></a>组件的嵌套</h3><p>一个大型的应用是很多个组件嵌套组成的，Angular的组件嵌套实现起来非常简单，耦合程度也非常低，复用性高，我们把之前的代码进行修改便可以体=验一下。<br>我们在app这个目录下新建一个<code>hero-detail.component.ts</code>的文件，代码如<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, Input &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">  selector: <span class="string">'hero-detail'</span>,</div><div class="line">  template: <span class="string">`</span></div><div class="line"><span class="string">    &lt;div *ngIf="hero"&gt;</span></div><div class="line"><span class="string">      &lt;h2&gt;&#123;&#123;hero.name&#125;&#125; details!&lt;/h2&gt;</span></div><div class="line"><span class="string">      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;&#123;&#123;hero.id&#125;&#125;&lt;/div&gt;</span></div><div class="line"><span class="string">      &lt;div&gt;</span></div><div class="line"><span class="string">        &lt;label&gt;name: &lt;/label&gt;</span></div><div class="line"><span class="string">        &lt;input [(ngModel)]="hero.name" placeholder="name"/&gt;</span></div><div class="line"><span class="string">      &lt;/div&gt;</span></div><div class="line"><span class="string">    &lt;/div&gt;</span></div><div class="line"><span class="string">  `</span></div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroDetailComponent &#123;</div><div class="line">  <span class="meta">@Input</span>() hero: Hero;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们的详情组件已经建好，需要在<code>app.module.ts</code>中配置一下即可使用，在头部添加</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125; <span class="keyword">from</span> <span class="string">'./hero-detail.component'</span>;</div></pre></td></tr></table></figure>
+<p>然后在<code>declarations</code>中添加<code>HeroDetailComponent</code><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">declarations: [</div><div class="line">  AppComponent,</div><div class="line">  HeroDetailComponent</div><div class="line">],</div></pre></td></tr></table></figure></p>
+<p>因为列表组件和详情组件都用到了<code>Hero</code>这个<code>class</code>，所以我们把它剥离出来，在app目录下新建<code>hero.ts</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> Hero &#123;</div><div class="line">  id: <span class="built_in">number</span>;</div><div class="line">  name: <span class="built_in">string</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后我们要修改<code>app.component.ts</code>来调用我们刚才写好的详情组件。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">template: <span class="string">`</span></div><div class="line"><span class="string">	&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></div><div class="line"><span class="string">	&lt;hero-detail [hero]="selectedHero"&gt;&lt;/hero-detail&gt;</span></div><div class="line"><span class="string">	&lt;h2&gt;My Heroes&lt;/h2&gt;</span></div><div class="line"><span class="string">	&lt;ul class="heroes"&gt;</span></div><div class="line"><span class="string">	  &lt;li *ngFor="let hero of heroes | slice:0:5"</span></div><div class="line"><span class="string">	  	[ngClass]="&#123;'selected':hero === selectedHero,'normal':hero!=selectedHero&#125;"</span></div><div class="line"><span class="string">	  	(click)="onSelect(hero,$event)"&gt;</span></div><div class="line"><span class="string">	    &lt;span class="badge"&gt;&#123;&#123;hero.id&#125;&#125;&lt;/span&gt; &#123;&#123;hero.name&#125;&#125;</span></div><div class="line"><span class="string">	  &lt;/li&gt;</span></div><div class="line"><span class="string">	&lt;/ul&gt;`</span>,</div></pre></td></tr></table></figure>
+<p>在最上面引入<code>Hero</code>这个<code>class</code>，否则会报错。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div></pre></td></tr></table></figure>
+<p>然后切到浏览器，发现和以前没什么区别，但其实详情组件已经被载入进来，而且工作正常。<br>代码说明：详情组件中，比较陌生的是<code>@Input()</code>，组件之间通讯肯定会有输入和输出。刚才我们的详情组件，内容是由父组件提供，所以它需要接受父组件给他的数据，Angular组件接受数据使用<code>@Input()</code>。对应的有<code>@Output()</code>，我们这里不展开讲解，有兴趣的同学可以下去了解。</p>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><p>&#160; &#160; &#160; &#160;现在我们的应用已经初具规模，常见的功能也都体验过了。顺着上一步的思路我们继续想，组件的嵌套是为了提高组件的复用性、降低每个组件的耦合程度。组件是视图层面的一个个小的单元，那么逻辑层面可不可以有一些复用的东西形成单独的功能模块被组件或者其他的服务所调用呢？答案是可以的，类似于AngularJS1.x的各种服务<code>service</code>、<code>factory</code>等等，Angular也可以自定义服务，但是种类不像AngularJS1.x版本分的那么详细，写法也相对简单了很多。<br>&#160; &#160; &#160; &#160;接着上面的代码我们思考，列表页需要展示<code>Heros</code>，详情页需要展示<code>hero</code>，但是他们的数据源都是一样的。那么我们可不可以把数据源单独剥离出来形成一个服务呢？甚至我们可以通过后台来获取我们要显示的数据，下面我们就来改造代码。</p>
+<p>首先新建<code>app/app.service.ts</code>文件<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Injectable</span>()</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppService &#123;</div><div class="line">  getHeroes(): Hero[] &#123;</div><div class="line">    <span class="keyword">return</span> HEROES;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> HEROES: Hero[] = [</div><div class="line">  &#123;id: <span class="number">11</span>, name: <span class="string">'Mr. Nice'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">12</span>, name: <span class="string">'Narco'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">13</span>, name: <span class="string">'Bombasto'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">14</span>, name: <span class="string">'Celeritas'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">15</span>, name: <span class="string">'Magneta'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">16</span>, name: <span class="string">'RubberMan'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">17</span>, name: <span class="string">'Dynama'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">18</span>, name: <span class="string">'Dr IQ'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">19</span>, name: <span class="string">'Magma'</span>&#125;,</div><div class="line">  &#123;id: <span class="number">20</span>, name: <span class="string">'Tornado'</span>&#125;</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，和新建组件不一样的地方是服务不需要引入<code>Component</code>这个类，但是需要<code>Injectable</code>这个类，所用是告诉Angular我们所写的服务中需要用到Angular的任何东西，Angular都会帮我们自动注入进来切一一对应好。<br>写好我们的服务以后，我们需要注入到我们的应用中即可使用，在<code>app.module.ts</code>中添加<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">'./app.service'</span>;</div></pre></td></tr></table></figure></p>
+<p>然后在<code>@NgModule</code>装饰器的对象中添加一个属性<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">providers: [ AppService ],</div></pre></td></tr></table></figure></p>
+<p>这一条的意思是我们的应用所依赖的服务，都可以在这里注入，而且在<code>app.module.ts</code>这个模块儿中注入的服务应用的所有组件都可以访问，所以一般会把一些全局的服务从这里注入，类似的有自己封装HTTP服务或者是整个应用的API服务等等。当然你也可以只在某个组件中注入这个组件所需要的服务，当父组件注入一个服务，该组件下的所有子组件都可以访问到这个服务。当子组件也需要注入这个服务，但是需要和父组件隔离或者需要不同的状态时，在子组件中再次注入这个服务，可以保证子组件注入的服务和父组件的服务相隔离。</p>
+<p>然后回到我们的<code>app.component.ts</code>修改如下<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component,OnInit  &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">'./app.service'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">	selector: <span class="string">'my-app'</span>,</div><div class="line">	styleUrls:[<span class="string">'./app.css'</span>],</div><div class="line">	template: <span class="string">`</span></div><div class="line"><span class="string">	&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></div><div class="line"><span class="string">	&lt;h2&gt;My Heroes&lt;/h2&gt;</span></div><div class="line"><span class="string">	&lt;ul class="heroes"&gt;</span></div><div class="line"><span class="string">	  &lt;li *ngFor="let hero of heroes | slice:0:5"</span></div><div class="line"><span class="string">	  	[ngClass]="&#123;'selected':hero === selectedHero,'normal':hero!=selectedHero&#125;"</span></div><div class="line"><span class="string">	  	(click)="onSelect(hero,$event)"&gt;</span></div><div class="line"><span class="string">	    &lt;span class="badge"&gt;&#123;&#123;hero.id&#125;&#125;&lt;/span&gt; &#123;&#123;hero.name&#125;&#125;</span></div><div class="line"><span class="string">	  &lt;/li&gt;</span></div><div class="line"><span class="string">	&lt;/ul&gt;</span></div><div class="line"><span class="string">	`</span>,</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line">	title = <span class="string">'Tour of Heroes'</span>;</div><div class="line">  heroes: Hero[];</div><div class="line">  selectedHero: Hero;</div><div class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> appService: AppService</span>) &#123; &#125;</div><div class="line">  getHeroes(): <span class="built_in">void</span> &#123;</div><div class="line">    <span class="keyword">this</span>.heroes=<span class="keyword">this</span>.appService.getHeroes();</div><div class="line">  &#125;</div><div class="line">  ngOnInit(): <span class="built_in">void</span> &#123;</div><div class="line">    <span class="keyword">this</span>.getHeroes();</div><div class="line">  &#125;</div><div class="line">  onSelect(hero: Hero): <span class="built_in">void</span> &#123;</div><div class="line">    <span class="keyword">this</span>.selectedHero = hero;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>切到浏览器，我们已经可以看到列表已经渲染好了，说明我们的服务已经注入到应用中，并且我们在组件中成功的调用了它。因为我们的数据现在是模拟的，都是同步加载，但是实际情况中，我们展示的数据往往来自服务器，所以都是异步的操作，这时需要我们引入一个<code>Promise</code>的概念，熟悉ES6的同学都应该不陌生，我们引入“承诺与异步编程”的概念来解决这个问题，修改<code>app.service.ts</code>代码如下</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getHeroes(): <span class="built_in">Promise</span> &lt; Hero[] &gt; &#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(HEROES);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样一个简单的模拟服务器返回数据的获取数据的方法已经写好了，对应的调用此方法的地方也需要调整一下，修改<code>app.component.ts</code>代码如下<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getHeroes(): <span class="built_in">void</span> &#123;</div><div class="line">  <span class="keyword">this</span>.heroService.getHeroes().then(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.heroes = heroes);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里用到了ES6的箭头函数，可以优雅的处理 this 指针。上面箭头函数等同于下面的代码<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">getHeroes(): <span class="built_in">void</span> &#123;</div><div class="line">  <span class="keyword">let</span> that = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">this</span>.heroService.getHeroes().then(</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">heroes</span>)</span>&#123;</div><div class="line">    	that.heroes = heroes;</div><div class="line">    &#125;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里粗略的讲一下箭头函数，更详细的可以去读一下“阮一峰”的<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">ECMAScript 6 入门</a>，这里就不展开讲了。<br>修改完成以后，我们切到浏览器，发现列表也是正常渲染的，说明刚才的服务已经正常工作了。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>&#160; &#160; &#160; &#160;路由对于一个SPA(单页应用)来说是必不可少的，Angular给我们提供了相对于AngfularJS1.x更为便捷的路由服务，下面我们就来实现一个简单的路由功能。<br>&#160; &#160; &#160; &#160;想要体验路由功能，最少需要两个页面，所以我们把英雄列表和英雄详情拿出来每个都形成单独的组件，在<code>./app</code>下新建<code>hero-list.component.ts</code>和<code>hero-detail.component.ts</code>,然后把<code>app.component.ts</code>中对应的每个组件的代码复制到响应组件的<code>.ts</code>文件中，最终代码如下</p>
+<blockquote>
+<p><code>app.component.ts</code></p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">	selector: <span class="string">'my-app'</span>,</div><div class="line">	template: <span class="string">`</span></div><div class="line"><span class="string">	&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></div><div class="line"><span class="string">	&lt;router-outlet&gt;&lt;/router-outlet&gt;</span></div><div class="line"><span class="string">	`</span>,</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line">	title = <span class="string">'Tour of Heroes'</span>;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"></span>) &#123;&#125;</div><div class="line">	ngOnInit(): <span class="built_in">void</span> &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里需要注意的是<code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>这个标签，这个标签的意思是告诉Angular路由切换的内容需要呈现在哪里。</p>
+<blockquote>
+<p><code>hero-list.component.ts</code><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">'./app.service'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">	selector: <span class="string">'hero-list'</span>,</div><div class="line">	template: <span class="string">`</span></div><div class="line"><span class="string">		&lt;h2&gt;My Heroes&lt;/h2&gt;</span></div><div class="line"><span class="string">		&lt;ul class="heroes"&gt;</span></div><div class="line"><span class="string">		  &lt;li *ngFor="let hero of heroes | slice:0:5"</span></div><div class="line"><span class="string">		  	[ngClass]="&#123;'selected':hero === selectedHero,'normal':hero!=selectedHero&#125;"</span></div><div class="line"><span class="string">		  	(click)="onSelect(hero,$event)"&gt;</span></div><div class="line"><span class="string">		    &lt;span class="badge"&gt;&#123;&#123;hero.id&#125;&#125;&lt;/span&gt; &#123;&#123;hero.name&#125;&#125;</span></div><div class="line"><span class="string">		  &lt;/li&gt;</span></div><div class="line"><span class="string">		&lt;/ul&gt;</span></div><div class="line"><span class="string">	`</span></div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroListComponent &#123;</div><div class="line">	heroes:<span class="built_in">any</span>;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"></span></div><div class="line"><span class="params">		<span class="keyword">private</span> appService: AppService,</span></div><div class="line"><span class="params">		<span class="keyword">private</span> router: Router</span></div><div class="line"><span class="params">	</span>) &#123;&#125;</div><div class="line">	getHeroes(): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.appService.getHeroes().then(<span class="function"><span class="params">heroes</span> =&gt;</span> <span class="keyword">this</span>.heroes = heroes);</div><div class="line">	&#125;</div><div class="line">	ngOnInit(): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.getHeroes();</div><div class="line">	&#125;</div><div class="line">	onSelect(hero: Hero,e:<span class="built_in">any</span>): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.router.navigate([<span class="string">'/detail'</span>, hero.id]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这里需要注意的是需要引入路由服务，因为我们要从列表页导航到详情页面，当然你可以使用最原始的办法：<code>window.location.href</code>这样的方式来实现，需要自己去拼接字符串。</p>
+<blockquote>
+<p><code>hero-detail.component.ts</code><br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; ActivatedRoute, Params &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Location &#125; <span class="keyword">from</span> <span class="string">'@angular/common'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; AppService &#125; <span class="keyword">from</span> <span class="string">'./app.service'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; Hero &#125; <span class="keyword">from</span> <span class="string">'./hero'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">	selector: <span class="string">'hero-detail'</span>,</div><div class="line">	template: <span class="string">`</span></div><div class="line"><span class="string">    &lt;div *ngIf="hero"&gt;</span></div><div class="line"><span class="string">      &lt;h2&gt;&#123;&#123;hero.name&#125;&#125; details!&lt;/h2&gt;</span></div><div class="line"><span class="string">      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;&#123;&#123;hero.id&#125;&#125;&lt;/div&gt;</span></div><div class="line"><span class="string">      &lt;div&gt;</span></div><div class="line"><span class="string">        &lt;label&gt;name: &lt;/label&gt;</span></div><div class="line"><span class="string">        &lt;input [(ngModel)]="hero.name" placeholder="name"/&gt;</span></div><div class="line"><span class="string">      &lt;/div&gt;</span></div><div class="line"><span class="string">      &lt;button (click)="goBack()"&gt;Back&lt;/button&gt;</span></div><div class="line"><span class="string">    &lt;/div&gt;</span></div><div class="line"><span class="string">  `</span></div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> HeroDetailComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line">	hero: <span class="built_in">any</span>;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"></span></div><div class="line"><span class="params">		<span class="keyword">private</span> appService: AppService,</span></div><div class="line"><span class="params">		<span class="keyword">private</span> route: ActivatedRoute,</span></div><div class="line"><span class="params">		<span class="keyword">private</span> location: Location</span></div><div class="line"><span class="params">	</span>) &#123;&#125;</div><div class="line">	ngOnInit(): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.getHeroe(<span class="keyword">this</span>.route.params);</div><div class="line">	&#125;</div><div class="line">	getHeroe(obj:<span class="built_in">any</span>): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.appService.getHeroes(obj).then(<span class="function"><span class="params">hero</span> =&gt;</span> <span class="keyword">this</span>.hero = hero);</div><div class="line">	&#125;</div><div class="line">	goBack(): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.location.back();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>详情页需要引入<code>import { ActivatedRoute, Params } from &#39;@angular/router&#39;</code>和<code>import { Location }from &#39;@angular/common&#39;;</code>一个是获取URL参数的服务，一个是返回列表页要用到。<br>基本工作我们已经搞定，然后需要在<code>app.module.ts</code>配置我们的路由表来实现路由的功能。在顶部引入路由模块</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; RouterModule &#125;   <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</div></pre></td></tr></table></figure>
+<p>还有刚才新建的两个组件</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; HeroListComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-list.component'</span>;</div><div class="line"><span class="keyword">import</span> &#123; HeroDetailComponent &#125;  <span class="keyword">from</span> <span class="string">'./hero-detail.component'</span>;</div></pre></td></tr></table></figure>
+<p>然后在对应位置把他们注入到我们的应用中即可</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@NgModule</span>(&#123;</div><div class="line">  imports: [</div><div class="line">    BrowserModule,</div><div class="line">    FormsModule,</div><div class="line">    RouterModule.forRoot([</div><div class="line">      &#123;</div><div class="line">        path: <span class="string">''</span>,</div><div class="line">        redirectTo: <span class="string">'/heroes'</span>,</div><div class="line">        pathMatch: <span class="string">'full'</span></div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        path: <span class="string">'heroes'</span>,</div><div class="line">        component: HeroListComponent</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        path: <span class="string">'detail/:id'</span>,</div><div class="line">        component: HeroDetailComponent</div><div class="line">      &#125;</div><div class="line">    ])</div><div class="line">  ],</div><div class="line">  declarations: [</div><div class="line">    AppComponent,HeroListComponent,HeroDetailComponent</div><div class="line">  ],</div><div class="line">  providers: [ AppService ],</div><div class="line">  bootstrap: [ AppComponent]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这时路由的功能已经实现，但是我们发现到详情页的时候会报错，因为我们刚才的服务是单独为列表页写的，如果详情页和列表页公用一个服务的话，需要我们稍作改动。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">getHeroes(obj?: <span class="built_in">any</span>): <span class="built_in">Promise</span> &lt; Hero[] &gt; &#123;</div><div class="line">  <span class="keyword">let</span> id = obj?obj.value.id:<span class="literal">undefined</span>;</div><div class="line">  <span class="keyword">let</span> result:<span class="built_in">any</span>;</div><div class="line">  <span class="keyword">if</span>(id===<span class="literal">undefined</span>)&#123;</div><div class="line">    result = HEROES;</div><div class="line">  &#125;&#123;</div><div class="line">    HEROES.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">e:<span class="built_in">any</span></span>)</span>&#123;</div><div class="line">      <span class="keyword">if</span>(e.id==id)&#123;</div><div class="line">      result = e;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(result);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;修改完成后，应用已经可以正常运行，可以点击英雄到详情页，然后再点击back按钮返回列表页，路由功能已经实现。然而我们发现列表的样式没有了，打开开发者工具查看，发现Angular会把我们的样式自动隔离在某个组件中，实现单个组件的样式只服务于这个组件本身，所以会造成路由过来的内容是无法享受到<code>app.component.ts</code>这个组件下的样式。所以我们需要把<code>app.css</code>添加到<code>index.html</code>中作为全局样式，这样任何组件都可被渲染到。</p>
+<h3 id="Http"><a href="#Http" class="headerlink" title="Http"></a>Http</h3><p>&#160; &#160; &#160; &#160;任何一个需要与服务端通讯的客户端应用都缺少不了与服务端通讯的服务，有的是自己封装的，有的是通过插件实现的，也有的是框架提供的。相比AngularJS1.x，Angular为我们提供了更为完善，功能更为强大的HTTP服务，下面我们来初步体验一下。<br>&#160; &#160; &#160; &#160;在<code>./app/</code>下新建<code>service</code>目录，然后在<code>service</code>目录下新建<code>appHttp.ts</code>和<code>appApi.ts</code>,代码如下</p>
+<blockquote>
+<p><code>appHttp.ts</code></p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Http, RequestOptions, Headers,URLSearchParams &#125; <span class="keyword">from</span> <span class="string">'@angular/http'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'rxjs/add/operator/map'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> baseUrl = <span class="string">'http://api.jisuapi.com/car'</span>;</div><div class="line"><span class="keyword">const</span> appKey = <span class="string">'c115b803134d35f2'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Injectable</span>()</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> appHttp &#123;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> http: Http</span>) &#123;&#125;</div><div class="line">	request(url: <span class="built_in">string</span>,</div><div class="line">	opts: <span class="built_in">any</span>) &#123;</div><div class="line">		<span class="built_in">console</span>.log(opts);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.http.request(url, <span class="keyword">new</span> RequestOptions(opts)).map(res = &gt; &#123;</div><div class="line">			<span class="built_in">console</span>.log(res);</div><div class="line">			<span class="keyword">return</span> res.json();</div><div class="line">		&#125;)</div><div class="line">	&#125;;</div><div class="line">	post(url: <span class="built_in">string</span>,</div><div class="line">	opts ? : <span class="built_in">Object</span>) &#123;</div><div class="line">		<span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</div><div class="line">		params.set(<span class="string">'appkey'</span>, appKey);</div><div class="line">		<span class="built_in">console</span>.log(params);</div><div class="line">		<span class="keyword">let</span> body = <span class="built_in">JSON</span>.stringify(&#123;</div><div class="line">			appkey: appKey</div><div class="line">		&#125;);</div><div class="line">		<span class="keyword">let</span> headers = <span class="keyword">new</span> Headers(&#123;</div><div class="line">			<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span></div><div class="line">		&#125;);</div><div class="line">		<span class="keyword">let</span> options = <span class="keyword">new</span> RequestOptions(&#123;</div><div class="line">			body: body,</div><div class="line">			headers: headers,</div><div class="line">			method: <span class="string">'post'</span></div><div class="line">		&#125;);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.request(baseUrl + url, ( &lt; <span class="built_in">any</span> &gt; <span class="built_in">Object</span>).assign(options, opts));</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">get</span>(url: <span class="built_in">string</span>,</div><div class="line">	opts ? : <span class="built_in">Object</span>) &#123;</div><div class="line">		<span class="built_in">console</span>.log(opts);</div><div class="line">		<span class="keyword">let</span> params = <span class="keyword">new</span> URLSearchParams();</div><div class="line">		params.set(<span class="string">'appkey'</span>, appKey);</div><div class="line">		<span class="keyword">let</span> body: <span class="built_in">any</span> = &#123;</div><div class="line">			search: params</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">console</span>.log(params);</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.request(baseUrl + url, ( &lt; <span class="built_in">any</span> &gt; <span class="built_in">Object</span>).assign(body, opts));</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>appApi.ts</code></p>
+</blockquote>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; appHttp &#125; <span class="keyword">from</span> <span class="string">'./appHttp'</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Injectable</span>()</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> appApi&#123;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _http: appHttp</span>) &#123;&#125;</div><div class="line">	getCar()&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>._http.get(<span class="string">'/brand'</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后修改我们的<code>app.module.ts</code>,在顶部引入我们刚才所写的两个服务并且注入到我们的应用中</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; HttpModule &#125; <span class="keyword">from</span> <span class="string">"@angular/http"</span>;</div><div class="line"><span class="keyword">import</span> &#123; appHttp &#125; <span class="keyword">from</span> <span class="string">'./service/appHttp'</span>;</div><div class="line"><span class="keyword">import</span> &#123; appApi &#125; <span class="keyword">from</span> <span class="string">'./service/appApi'</span>;</div><div class="line"></div><div class="line">imports:[</div><div class="line">...</div><div class="line">HttpModule,</div><div class="line">...</div><div class="line">],</div><div class="line">providers:[</div><div class="line">...</div><div class="line">appHttp,</div><div class="line">appApi</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>这时我们自定义的http服务已经注入到应用中，可以在应用下的任何组件使用，让我们来修改<code>app.component.ts</code>,代码如下<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Component, OnInit &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; appApi &#125; <span class="keyword">from</span> <span class="string">'./service/appApi'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Component</span>(&#123;</div><div class="line">	selector: <span class="string">'my-app'</span>,</div><div class="line">	template: <span class="string">`</span></div><div class="line"><span class="string">	&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</span></div><div class="line"><span class="string">	&lt;router-outlet&gt;&lt;/router-outlet&gt;</span></div><div class="line"><span class="string">	`</span>,</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent <span class="keyword">implements</span> OnInit &#123;</div><div class="line">	title = <span class="string">'Tour of Heroes'</span>;</div><div class="line">	<span class="keyword">private</span> cars:<span class="built_in">any</span>;</div><div class="line">	<span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> api:appApi</span>) &#123;&#125;</div><div class="line">	getCar()&#123;</div><div class="line">		<span class="keyword">this</span>.api.getCar().subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">this</span>.cars = data;</div><div class="line">        <span class="built_in">console</span>.log(data);</div><div class="line">      &#125;);</div><div class="line">	&#125;</div><div class="line">	ngOnInit(): <span class="built_in">void</span> &#123;</div><div class="line">		<span class="keyword">this</span>.getCar();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>切换到浏览器，打开开发者工具，刷新页面，可以看到控制台已经打印出从服务端返回的数据，说明我们刚才自定义的http服务已经正常工作。Angular的http服务功能非常强大，这里就不展开讲解了，想了解的可以下去自己到官网查看示例和API文档。</p>
+<h2 id="6、整合第三方插件"><a href="#6、整合第三方插件" class="headerlink" title="6、整合第三方插件"></a>6、整合第三方插件</h2><p>我们在开发应用的过程中，往往需要借助第三方插件来实现某些功能。最常见的就是各种<code>jquery</code>插件，还有<code>echarts</code>图标插件、<code>moment</code>日期操作插件、<code>datepicker</code>日期插件、<code>swiper</code>滑块插件等等。在以往的项目中，我们用过最原始的方式<code>&lt;script&gt;</code>标签来载入我们需要的插件，也用过<code>requireJS、seaJS、CommonJS</code>这样前端模块化的解决方案，还有AngularJS1.x时期通过依赖注入的方式。但是因为<code>Angular</code>使用编程语言的特殊性，以往的引入方式都无法正常使用插件或者不是最好的解决方案，下面我们来大致介绍下Angular中引入第三方插件的方法。<br>首先使用cnpm来安装我们需要的插件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cnpm install -S jquery</div><div class="line">cnpm install -s moment</div><div class="line">....</div></pre></td></tr></table></figure></p>
+<p>然后在<code>app.component.ts</code>顶部引入我们刚才安装的插件，在Oninit方法中添加一些测试代码来验证插件是否正常工作。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> $ <span class="keyword">from</span> <span class="string">'jquery'</span>;</div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</div><div class="line">...</div><div class="line"><span class="built_in">console</span>.log($);</div><div class="line">onsole.log(moment().subtract(<span class="number">6</span>, <span class="string">'days'</span>).format(<span class="string">'YYYY MM DD'</span>));</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>然后切换到浏览器，发现控制台提示我们jquery找不到，服务器404错误代码，这时候我们需要在<code>systemjs.config.js</code>中配置一下我们刚才添加的插件，类似requireJS的config文件，需要现配置一下，然后在项目中使用。在<code>systemjs.config.js</code>的<code>map</code>字段中添加</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"><span class="string">'jquery'</span>:<span class="string">'npm:jquery/dist/jquery.min.js'</span>,</div><div class="line"><span class="string">'moment'</span>: <span class="string">'npm:moment/moment.js'</span></div><div class="line">...</div></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;保存以后刷新浏览器，发现已经不报错，而且控制台已经打印出jquery的$和moment的方法，说明第三方插件已经成功加载。<br>&#160; &#160; &#160; &#160;因为Angular项目的特殊性，搭建开发环境有很多种方案，现在主要的方式有<code>angular-cli、angular-seed、system.js</code>这几种，我们使用的官方的这个<code>quickstart</code>的例子就是<code>system.js</code>方式，其他两种开发环境引入第三方插件的方式大同小异，有兴趣的同学可以深入了解下，本文不展开讲解。</p>
+<p>注：如果最初<code>package.json</code>中依赖没有<code>jquery</code>，后续安装的话，虽然可以运行，再次<code>npm start</code>时可能会报错，需要cd到你项目<code>tsconfig.json</code>所在的文件夹下，执行以下命令来解决报错。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cnpm install typings -g</div><div class="line"></div><div class="line">typings install dt~jquery --global --save</div></pre></td></tr></table></figure></p>
+<p>这是因为jquery没有指定任何类型，不符合typescript的语法标准，需要安装一个插件来帮助我们在typescript的项目中使用JavaScript写的插件。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      7*
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://blog.niceweb.me/2017/08/04/Angular一小时快速上手/" title="Angular一小时快速上手">http://blog.niceweb.me/2017/08/04/Angular一小时快速上手/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular/" rel="tag"># Angular</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/03/前端编码规范—jQuery规范/" rel="next" title="前端编码规范—jQuery规范">
+                <i class="fa fa-chevron-left"></i> 前端编码规范—jQuery规范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/15/Vue组件之间通信方式总结/" rel="prev" title="Vue组件之间通信方式总结">
+                Vue组件之间通信方式总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/7498226?v=4&u=60bc9fd6e63144c1fd975814086a9fd328da90c6&s=400"
+               alt="7*" />
+          <p class="site-author-name" itemprop="name">7*</p>
+           
+              <p class="site-description motion-element" itemprop="description">尘世中一枚迷途的小前端er</p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构说明"><span class="nav-number">2.</span> <span class="nav-text">目录结构说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDE的选择"><span class="nav-number">3.</span> <span class="nav-text">IDE的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#了解代码"><span class="nav-number">4.</span> <span class="nav-text">了解代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续深入"><span class="nav-number">5.</span> <span class="nav-text">继续深入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方示例扩展"><span class="nav-number">5.1.</span> <span class="nav-text">官方示例扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表循环"><span class="nav-number">5.2.</span> <span class="nav-text">列表循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理事件"><span class="nav-number">5.3.</span> <span class="nav-text">处理事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用内置指令"><span class="nav-number">5.4.</span> <span class="nav-text">常用内置指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ngIf"><span class="nav-number">5.4.1.</span> <span class="nav-text">ngIf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ngClass"><span class="nav-number">5.4.2.</span> <span class="nav-text">ngClass</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管道操作符"><span class="nav-number">5.4.3.</span> <span class="nav-text">管道操作符 ( | )</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件的嵌套"><span class="nav-number">5.5.</span> <span class="nav-text">组件的嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务"><span class="nav-number">5.6.</span> <span class="nav-text">服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由"><span class="nav-number">5.7.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Http"><span class="nav-number">5.8.</span> <span class="nav-text">Http</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、整合第三方插件"><span class="nav-number">6.</span> <span class="nav-text">6、整合第三方插件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">7*</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt9rGKH8';
+      var conf = '41c3e3f3b25a5ff73445fe3e4b1f42e9';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
