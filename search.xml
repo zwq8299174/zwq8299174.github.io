@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[妙用 scale 与 transfrom-origin，精准控制动画方向]]></title>
-    <url>%2Fposts%2Fb33001d8%2F</url>
+    <title></title>
+    <url>%2Fposts%2F0%2F</url>
     <content type="text"><![CDATA[妙用 scale 与 transfrom-origin，精准控制动画方向.note-content{font-family:微软雅黑,'Helvetica Neue',Arial,'Hiragino Sans GB',STHeiti,'Microsoft YaHei','WenQuanYi Micro Hei',SimSun,Song,sans-serif}.note-content code,.note-content h1,.note-content h2,.note-content h3,.note-content h4,.note-content h5.div,.note-content p,.note-content pre{line-height:2}妙用 scale 与 transfrom-origin，精准控制动画方向将下面这个动画的下划线效果，从左进入，右边离开修改为从上方进入，下方离开。描述很难理解，看看原本的效果：难点所在第一眼看到这个效果，我的内心毫无波澜。以为只是简单的一个下划线 hover 效果，经过友人提醒，才发现，这个动画效果中，下划线是从一端进入，从另外一端离开的。而且，这个 hover 动画是纯 CSS 实现的。先不考虑上面说的修改需求，先想一想，如果就是还原上述效果，仅仅使用 CSS，该如何做呢？还原效果嗯，正常而言，我们一个 hover 效果，可能就是从哪里来，回哪里去，大部分的应该是这样的：现在，难点就在于如何在 hover 离开的时候，改变动画行进的方向。下面我们将一个 hover 动画分解为 3 个部分：hover 进入状态hover 停留状态hover 离开状态但是，对于一个 hover 效果而言，正常来说，只有初始状态，和hover状态两种。可能我们的代码是这样：1.div { 2. 3. xxxx... 4. 5.} 6. 7.div:hover { 8. 9. xxxx... 10. 11.} 对于一个 hover transition 动画，它应该是从：正常状态 -&gt; hover状态 -&gt; 正常状态 （三个步骤，两种状态）所以，必须要有一种方法，能够使得 hover 动画的进入与离开产生两种不一样的效果，实现：状态1 -&gt; hover状态 -&gt; 状态2 （三个步骤，三种状态）实现控制动画方向的关键点所以，这里的关键点就在于（划重点）：使得 hover 动画的进入与离开产生两种不一样的效果 。接下来，也就是本文的关键所在，使用 transform: scale() 以及 transform-origin 实现这个效果。transform: scale() 实现线条运动transform: scale 大家应该都很熟悉了，通俗来说是用于缩放，用官方的话说，就是：CSS 函数 scale() 用于修改元素的大小。可以通过向量形式定义的缩放值来放大或缩小元素，同时可以在不同的方向设置不同的缩放值。这里我们使用 transform: scaleX(0) 与 transform: scaleX(1) 来改变线条的显示与隐藏，它的 CSS 代码简单来看，可能是这样：1.div { 2. position: absolute; 3. width: 200px; 4. height: 60px; 5.} 6.div::before { 7. content: ""; 8. position: absolute; 9. left: 0; 10. bottom: 0; 11. width: 200px; 12. height: 2px; 13. background: deeppink; 14. transition: transform .5s; 15. transform: scaleX(0); 16.} 17. 18.div:hover::before { 19. transform: scaleX(1); 20.} 嗯？为什么是要用transform: scale() 来实现线条的动画？因为它可以配合 transform-origin 实现动画的不同运动方向：transform-origin 实现线条运动方向transform-origin 让我们可以更改一个元素变形（transform）的原点，transform-origin 属性可以使用一个，两个或三个值来指定，其中每个值都表示一个偏移量。 没有明确定义的偏移将重置为其对应的初始值。本效果最最最重要的地方就在于这里，我们使用 transform-origin 去改变 transform: scale() 的原点实现线条运动的方向。我们给线条设置一个默认的 transform-origin 记为状态1hover 的时候，设置另外一个不同的 transform-origin, 记为状态2所以，当然我们 hover 的时候，会读取状态2的transform-origin，从该原点开始放大至 scaleX(1)，hover 离开的时候，会读取状态1的transform-origin，从scaleX(1)状态缩小至该原点。嗯，CSS代码大概是这样：1.div { 2. position: absolute; 3. width: 200px; 4. height: 60px; 5.} 6.div::before { 7. content: ""; 8. position: absolute; 9. left: 0; 10. bottom: 0; 11. width: 200px; 12. height: 2px; 13. background: deeppink; 14. transition: transform .5s; 15. transform: scaleX(0); 16. transform-origin: 100% 0; 17.} 18.div:hover::before { 19. transform: scaleX(1); 20. transform-origin: 0 0; 21.} 这里，我们巧妙的通过 hover 状态施加了一层新的 transform-origin ，让动画的进入与离开产生了两种不同的效果，两个不同的方向。如此一来，也就顺利实现了我们想要的效果，撒花：注意，这里使用了 transform-origin 去改变 transform: scale() 的原点实现线条运动的方向，而没有借助诸如 position 位移，transform: translate()，或者 margin 等位置属性去改变线条所在的位置。所以，有趣的是，线条其实没有产生过任何位移，这里其实也是障眼法，让它看上去，它好像在移动。拓展延伸嗯，有了上述方法，也就是 transform: scale() 配合 transform-origin ，我们可以开始随意改变动画的初始与结束状态了。把他们运用到其他效果之上，简单的几个示意效果：值得注意的点还有几个点是比较有意思的，大家可以尝试尝试，思考思考：尝试改变两种状态的 transition-timing-function 缓动函数，可以让动画更加流畅具有美感；注意一下，线条的 transition 设置的是 transition: transform .5s 而不是 transition: all .5s，体验一下两种写法所产生的不同效果。]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS3</tag>
-        <tag>css</tag>
-        <tag>样式</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[【Node入门教程】-了解并使用Http模块]]></title>
