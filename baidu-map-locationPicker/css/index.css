@@ -590,6 +590,7 @@ html {
 
 .map-wrap {
   height: 45%;
+  min-height: 300px;
   position: relative;
   top: 46px;
   background-color: #f6f6f6; }
