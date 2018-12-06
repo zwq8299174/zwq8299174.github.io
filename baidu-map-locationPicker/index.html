@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>百度地址选取</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,user-scalable=no">
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6YaViZA2nUoQN7jpzSj71XsQ"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<div class="search-wrap init-status">
+			<div class="search-bar">
+				<form name="poi-search" id="poiSearch">
+					<input type="search" class="keyword" id="searchword" placeholder=" ">
+					<button type="reset" class="clear-input hide icon">&#xe639;</button>
+					<button type="submit" class="submit hide">搜索</button>
+				</form>
+				<a class="cancle">取消</a>
+			</div>
+		</div>
+		<div class="search-list">
+			<ul></ul>
+			<a class="clear-history" style="display: none;">
+				<span class="fn-clear">
+					<i class="fn-left">清除历史</i>
+					<i class="icon fn-left">&#xe620;</i>
+				</span>
+			</a>
+		</div>
+		<div class="map-wrap">
+			<div id="container"></div>
+		</div>
+		<div class="address-list">
+			<ul></ul>
+		</div>
+		<script src="js/zepto.min.js"></script>
+		<script src="js/touch.js"></script>
+		<script src="js/inobounce.min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+	</body>
+
+</html>
