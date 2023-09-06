@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>auto-css-plugin 预览工具</title>
+		<script src="https://cdn.jsdelivr.net/npm/auto-css-plugin@1.0.0/dist/script/auto-css.js"></script>
+		<link rel="stylesheet" href="./reset.css" />
+	</head>
+
+	<body>
+		<div class="demo-flex-flex-start-flex-start demo-bg-f2f5fc">
+			<div class="demo-w-600 demo-h-100vh demo-position-sticky demo-t-0 demo-p-x-24 demo-p-y-17 demo-flex-flex-start-flex-start demo-flex-column demo-bg-fff">
+				<div class="demo-w-100p demo-d-flex demo-br-4 demo-flex-column demo-bg-fff">
+					<p class="demo-fs-18 demo-c-111f2c demo-fw-600 demo-m-b-16">功能说明</p>
+					<div class="demo-w-100p">
+						<p>在编辑区为 预览区div添加 class 将会自动生成样式 可在左侧预览</p>
+						<p class="demo-c-red demo-fs-12">(chrome >= 44 不兼容ie)</p>
+						<p>class 编写规则 详见 <a class="demo-fs-25" href="https://github.com/zwq8299174/auto-css-plugin/blob/main/RULE.md" target="_blank">github</a></p>
+					</div>
+				</div>
+				<h3 class="demo-fs-18 demo-c-111f2c demo-m-b-19">生成代码预览:</h3>
+				<div data-html="cssCode" class="demo-bg-f7f8fc demo-flex-1 demo-w-100p demo-p-24 demo-overflow-y-auto demo-sc-1"></div>
+			</div>
+			<div class="demo-m-24 demo-flex-1 demo-flex-flex-start-flex-start demo-flex-column">
+				<div class="demo-w-100p demo-d-flex demo-br-4 demo-flex-column demo-p-16 demo-bg-fff demo-m-b-24">
+					<p class="demo-fs-18 demo-c-111f2c demo-fw-600 demo-m-b-16">视图区</p>
+					<div data-showClass="fclassName">
+						<div data-showClass="cOneclassName">test1</div>
+						<div data-showClass="cTwolassName">test2</div>
+					</div>
+				</div>
+				<div class="demo-w-100p demo-d-flex demo-br-4 demo-flex-column demo-p-16 demo-bg-fff demo-m-b-24">
+					<p class="demo-fs-18 demo-c-111f2c demo-fw-600 demo-m-b-16">编辑区</p>
+					<div class="demo-w-100p demo-h-354 demo-border-1 demo-border-c-eee demo-p-24 demo-p-t-16 demo-flex-between-flex-start">
+						<div class="demo-flex-1 demo-m-r-24 demo-h-100p demo-d-flex demo-flex-column">
+							<p>父元素class:</p>
+							<textarea data-value="fclassName" class="demo-m-t-16 demo-w-100p demo-flex-1 demo-p-16" placeholder="视图区父元素class 以空格分割"></textarea>
+						</div>
+						<div class="demo-flex-1 demo-h-100p demo-flex-flex-start-flex-start demo-flex-column">
+							<div class="demo-flex-flex-start-flex-start demo-flex-column demo-flex-1 demo-bg-f7f8fc demo-w-100p demo-p-16 demo-p-t-12 demo-m-b-24">
+								<p class="demo-m-b-8">子元素1clas:</p>
+								<textarea data-value="cOneclassName" class="demo-p-16 demo-flex-1 demo-w-100p" placeholder="视图区子元素1class 以空格分割"></textarea>
+							</div>
+							<div class="demo-flex-flex-start-flex-start demo-flex-column demo-flex-1 demo-bg-f7f8fc demo-w-100p demo-p-16 demo-p-t-12">
+								<p class="demo-m-b-8">子元素2clas:</p>
+								<textarea data-value="cTwolassName" class="demo-p-16 demo-flex-1 demo-w-100p" placeholder="视图区子元素2class 以空格分割"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="./index.js"></script>
+	</body>
+</html>
